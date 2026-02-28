@@ -12,15 +12,17 @@
     <nav>
         <div class="logo">LK</div>
         <ul>
-            <li><a href="/"> Meee</a></li>
-            <li>|</li>
-            <li><a href="/#projects"> Projects</a></li>
-            <li>|</li>
-            <li><a href="/#skills"> Skills</a></li>
-            <li>|</li>
-            <li><a href="/#contact"> Contact</a></li>
-            <li>|</li>
-            <li><a href="/tutorial"> Tutorial</a></li>
+            <li><a href="/">Meee</a></li>
+            <li class="separator">|</li>
+            <li><a href="#projects">Projects</a></li>
+            <li class="separator">|</li>
+            <li><a href="#skills">Skills</a></li>
+            <li class="separator">|</li>
+            <li><a href="#contact">Contact</a></li>
+            <li class="separator">|</li>
+            <li><a href="/tutorial">Tutorial</a></li>
+            <li class="separator">|</li>
+            <li><a href="https://bryandacera.me">Chatgpt</a></li>
         </ul>
     </nav>
 
@@ -34,7 +36,7 @@
         <h2>Data Archives</h2>
         <div class="projects-grid">
             <div class="project-card">
-                <div class="project-image"><img src="https://www.marcelino-resort-hotel.online/img/banner-1.webp" alt="Marcelino Resort & Hotel" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                <div class="project-image"><img src="https://www.marcelino-resort-hotel.online/img/banner-1.webp" alt="Marcelino Resort & Hotel"></div>
                 <div class="project-content">
                     <h3>Marcelino Resort & Hotel</h3>
                     <p>Helped develop an online reservation web application featuring seamless booking integration, real-time availability updates, and responsive design for optimal guest experience across all devices.</p>
@@ -42,14 +44,14 @@
                 </div>
             </div>
             <div class="project-card">
-                <div class="project-image"><img src="https://i.pinimg.com/1200x/6c/03/07/6c030758c789efe762cbcdf3eddc7d1e.jpg" alt=""></div>
+                <div class="project-image"><img src="https://i.pinimg.com/1200x/6c/03/07/6c030758c789efe762cbcdf3eddc7d1e.jpg" alt="Graphic Design OJT"></div>
                 <div class="project-content">
                     <h3>Graphic Design | OJT</h3>
                     <p>On-the-Job Training experience in graphic design at Mandaue. Developed visual assets, branding materials, and design solutions while mastering industry-standard tools and design principles.</p>
                 </div>
             </div>
             <div class="project-card">
-                <div class="project-image"><img src="https://i.pinimg.com/736x/a0/c3/10/a0c310c3dce06b7b3629440ef8649696.jpg" alt=""></div>
+                <div class="project-image"><img src="https://i.pinimg.com/736x/a0/c3/10/a0c310c3dce06b7b3629440ef8649696.jpg" alt="Meow Project"></div>
                 <div class="project-content">
                     <h3>meow meow </h3>
                     <p>Meow meow meow meow. Meow meow meow, meow , meow, meow meow meow. Meow meow meow meow. Meow meow meow, meow , meow, meow meow meow. Meow meow meow meow. Meow meow meow, meow , meow, meow meow meow.</p>
@@ -75,7 +77,7 @@
         <h2>Open Channel</h2>
         <div class="contact-container">
             <p style="margin-bottom: 2.5rem; color: var(--text-muted);">Ready to collaborate on full-stack web applications and UI/UX design projects. I bring expertise in Laravel, React, and modern frontend technologies to build scalable, responsive solutions. Open for freelance and full-time opportunities.</p>
-            <a href="mailto:your.email@example.com" class="btn">Send Transmission</a>
+            <a href="mailto:your.email@example.com" class="btn">Send meow meow</a>
             <div style="margin-top: 2rem; display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
                 <a href="https://www.facebook.com/kaye.liezl" target="_blank" style="color: var(--accent); text-decoration: none; font-size: 0.95rem; padding: 0.5rem 1rem; border: 1px solid var(--accent); border-radius: 5px; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='var(--accent)'; this.style.color='#000';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='var(--accent)';">Facebook</a>
                 <a href="#" target="_blank" style="color: var(--accent); text-decoration: none; font-size: 0.95rem; padding: 0.5rem 1rem; border: 1px solid var(--accent); border-radius: 5px; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='var(--accent)'; this.style.color='#000';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='var(--accent)';">LinkedIn</a>
