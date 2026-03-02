@@ -4,27 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ubuntu Server Setup Tutorial</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon_io/favicon.ico') }}">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
     @vite('resources/css/style.css')
 </head>
 <body>
 
-      <nav>
-        <div class="logo">LK</div>
-        <ul>
-            <li><a href="/">Meee</a></li>
-            <li class="separator">|</li>
-            <li><a href="/#projects">Projects</a></li>
-            <li class="separator">|</li>
-            <li><a href="/#skills">Skills</a></li>
-            <li class="separator">|</li>
-            <li><a href="/#contact">Contact</a></li>
-            <li class="separator">|</li>
-            <li><a href="/#tutorial">Tutorial</a></li>
-            <li class="separator">|</li>
-            <li><a href="http://bryandacera.me">Chatgpt</a></li>
-        </ul>
-    </nav>
+    <x-header />
 
     <section class="hero tutorial-hero" id="about">
         <h1>Ubuntu Server Setup Guide</h1>

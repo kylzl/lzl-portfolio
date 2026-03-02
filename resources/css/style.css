@@ -41,8 +41,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 5%;
-            background-color: rgba(5, 5, 5, 0.8);
+            padding: 0 5%;
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 0, 179, 0.2);
             position: sticky;
@@ -52,12 +51,50 @@
         }
 
         nav .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 900px;
             font-size: 1.5rem;
             font-weight: 700;
             color: #fff;
             text-shadow: 0 0 10px var(--neon-cyan);
             
             }
+
+        .logo-flip {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            overflow: hidden;
+        }
+
+        .logo-face {
+            position: absolute;
+            inset: 0;
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            display: block;
+            transition: opacity 0.35s ease, filter 0.35s ease;
+        }
+
+        .logo-front {
+            opacity: 1;
+        }
+
+        .logo-back {
+            opacity: 0;
+        }
+
+
+        nav .logo:hover .logo-front {
+            opacity: 0;
+        }
+
+        nav .logo:hover .logo-back {
+            opacity: 1;
+        }
 
         nav ul {
             list-style: none;
@@ -204,6 +241,19 @@
             font-size: 1.2rem;
         }
 
+        .project-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            text-shadow: 0 0 8px var(--accent);
+        }
+
         /* Skills Section */
         .skills {
             background-color: rgba(17, 17, 17, 0.8);
@@ -247,6 +297,34 @@
             border-radius: 8px;
             border: 1px solid #333;
             box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .contact-text {
+            margin-bottom: 2.5rem;
+            color: var(--text-muted);
+        }
+
+        .contact-socials {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-social-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--accent);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-social-link:hover {
+            background-color: var(--accent);
+            color: #000;
         }
 
         /* Footer */
