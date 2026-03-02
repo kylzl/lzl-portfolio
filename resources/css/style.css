@@ -302,3 +302,200 @@
                 font-size: 2rem;
             }
         }
+
+        /* === UBUNTU TUTORIAL STYLES === */
+        #tutorial-content {
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+        }
+
+        .tutorial-hero {
+            padding: 1.5rem 1rem;
+            text-align: center;
+        }
+
+        .tutorial-hero h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tutorial-hero p {
+            margin: 0;
+            color: var(--text-muted);
+        }
+
+        .section-heading {
+            color: var(--accent);
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            border-top: 2px solid var(--accent);
+            padding-top: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .subsection-heading {
+            color: var(--text);
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+        }
+
+        .code-block-wrapper {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .code-block-wrapper.compact {
+            margin-bottom: 0;
+        }
+
+        .code-block-wrapper.with-spacing {
+            margin-bottom: 1rem;
+        }
+
+        .code-block-wrapper.extra-spacing {
+            margin-bottom: 2rem;
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: #051212;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 0.4rem 0.6rem;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            z-index: 10;
+            transition: all 0.3s;
+        }
+
+        .copy-button:hover {
+            background-color: #051E1E;
+        }
+
+        .code-pre {
+            background: rgba(0, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: var(--accent);
+        }
+
+        .info-box {
+            background: rgba(0, 255, 255, 0.05);
+            border-left: 4px solid var(--accent);
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+        }
+
+        .info-box-title {
+            margin-bottom: 0.8rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .info-box-title strong {
+            font-weight: 600;
+        }
+
+        .info-box p {
+            margin-bottom: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .info-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-box ul {
+            margin: 0.5rem 0 0 0;
+            color: var(--text-muted);
+            padding-left: 1.5rem;
+        }
+
+        .info-box ul li {
+            margin-bottom: 0.4rem;
+        }
+
+        .info-box ul li strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .code-inline {
+            background: rgba(0, 255, 255, 0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 2px;
+            color: var(--accent);
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+        }
+
+        .tutorial-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .tutorial-table th {
+            text-align: left;
+            padding: 6px;
+            border-bottom: 1px solid var(--accent);
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .tutorial-table td {
+            padding: 6px;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+            color: var(--text-muted);
+        }
+
+        .tutorial-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .tutorial-footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            border-top: 1px solid rgba(0, 255, 255, 0.1);
+            margin-top: 3rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .footer-links a:hover {
+            text-shadow: 0 0 8px var(--accent);
+        }
+
+        .footer-divider {
+            color: var(--text-muted);
+        }
+
+        .tutorial-footer p {
+            margin: 0.5rem 0 0 0;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }

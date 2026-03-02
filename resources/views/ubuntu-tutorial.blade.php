@@ -26,381 +26,411 @@
         </ul>
     </nav>
 
-    <section class="hero" id="about" style="padding: 1.5rem 1rem; text-align: center;">
-        <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Ubuntu Server Setup Guide</h1>
-        <p style="margin: 0; color: var(--text-muted);">Complete tutorial for setting up MySQL, Nginx, and Laravel on Ubuntu servers.</p>
+    <section class="hero tutorial-hero" id="about">
+        <h1>Ubuntu Server Setup Guide</h1>
+        <p>Complete tutorial for setting up MySQL, Nginx, and Laravel on Ubuntu servers.</p>
     </section>
 
-    <section id="tutorial-content" style="max-width: 900px; margin: 3rem auto; padding: 0 1rem;">
-        <h2 style="color: var(--accent); margin-top: 3rem; margin-bottom: 1.5rem; border-top: 2px solid var(--accent); padding-top: 1.5rem; font-size: 1.3rem;">01 | Access Server</h2>
-        <div style="position: relative; margin-bottom: 2rem;">
-            <button onclick="copyToClipboard(this)"
-                style="position: absolute; top: 0.5rem; right: 0.5rem;
-                background: rgba(0,255,255,0.2);
-                border: 1px solid var(--accent);
-                color: var(--accent);
-                padding: 0.4rem 0.6rem;
-                cursor: pointer;
-                border-radius: 3px;
-                font-size: 0.8rem;
-                z-index: 10;
-                transition: all 0.3s;">
-                Copy
-                </button>
-            <pre style="background: rgba(0,255,255,0.05); padding: 1rem; border-radius: 5px; overflow-x: auto; margin: 0;">ssh root@ip_address</pre>
+    <section id="tutorial-content">
+        <h2 class="section-heading">01 | Access Server</h2>
+        <div class="code-block-wrapper">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <pre class="code-pre">ssh root@server_ip</pre>
         </div>
 
-        <h2 style="color: var(--accent); margin-top: 3rem; margin-bottom: 1.5rem; border-top: 2px solid var(--accent); padding-top: 1.5rem; font-size: 1.3rem;">02 | How to Install MySQL</h2>
-        <div style="position: relative; margin-bottom: 1.5rem;">
-            <button onclick="copyToClipboard(this)"
-style="position: absolute; top: 0.5rem; right: 0.5rem;
-background: rgba(0,255,255,0.2);
-border: 1px solid var(--accent);
-color: var(--accent);
-padding: 0.4rem 0.6rem;
-cursor: pointer;
-border-radius: 3px;
-font-size: 0.8rem;
-z-index: 10;
-transition: all 0.3s;">
-Copy
-</button>
-            <pre style="background: rgba(0,255,255,0.05); padding: 1rem; border-radius: 5px; overflow-x: auto; margin: 0;">sudo apt update
-sudo apt upgrade -y
-keep the local currently installed
-(Click Enter)</pre>
+        <h2 class="section-heading">02 | Add Server User</h2>
+        
+        <h3 class="subsection-heading">Create a New User</h3>
+        <div class="info-box">
+            <p class="info-box-title">Create a new non-root user for server management. Replace "serveruser" with your desired username.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">sudo adduser serveruser</pre>
+            </div>
         </div>
 
-        <h3 style="color: var(--text); margin-top: 1.5rem; margin-bottom: 0.8rem; font-size: 1rem;">Install MySQL Server</h3>
-        <div style="position: relative; margin-bottom: 1.5rem;">
-            <button onclick="copyToClipboard(this)"
-style="position: absolute; top: 0.5rem; right: 0.5rem;
-background: rgba(0,255,255,0.2);
-border: 1px solid var(--accent);
-color: var(--accent);
-padding: 0.4rem 0.6rem;
-cursor: pointer;
-border-radius: 3px;
-font-size: 0.8rem;
-z-index: 10;
-transition: all 0.3s;">
-Copy
-</button>
-            <pre style="background: rgba(0,255,255,0.05); padding: 1rem; border-radius: 5px; overflow-x: auto; margin: 0;">sudo apt install mysql-server -y
-\q;</pre>
+        <h3 class="subsection-heading">Add User to Sudo Group</h3>
+        <div class="info-box">
+            <p class="info-box-title">Grant sudo privileges to the new user so they can run administrative commands with the sudo prefix.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">sudo usermod -aG sudo serveruser</pre>
+            </div>
         </div>
 
-        <h3 style="color: var(--text); margin-top: 1.5rem; margin-bottom: 0.8rem; font-size: 1rem;">Start & Enable MySQL</h3>
-        <div style="position: relative; margin-bottom: 1.5rem;">
-            <button onclick="copyToClipboard(this)"
-style="position: absolute; top: 0.5rem; right: 0.5rem;
-background: rgba(0,255,255,0.2);
-border: 1px solid var(--accent);
-color: var(--accent);
-padding: 0.4rem 0.6rem;
-cursor: pointer;
-border-radius: 3px;
-font-size: 0.8rem;
-z-index: 10;
-transition: all 0.3s;">
-Copy
-</button>
-            <pre style="background: rgba(0,255,255,0.05); padding: 1rem; border-radius: 5px; overflow-x: auto; margin: 0;">sudo systemctl start mysql
-sudo systemctl enable mysql
-sudo systemctl status mysql</pre>
+        <h3 class="subsection-heading">Switch to New User</h3>
+        <div class="info-box">
+            <p class="info-box-title">Switch to the new user account. You can use this for future server management tasks.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">su - serveruser</pre>
+            </div>
         </div>
 
-        <h3 style="color: var(--text); margin-top: 1.5rem; margin-bottom: 0.8rem; font-size: 1rem;">Secure MySQL Installation</h3>
-        <div style="position: relative; margin-bottom: 1.5rem;">
-            <button onclick="copyToClipboard(this)"
-style="position: absolute; top: 0.5rem; right: 0.5rem;
-background: rgba(0,255,255,0.2);
-border: 1px solid var(--accent);
-color: var(--accent);
-padding: 0.4rem 0.6rem;
-cursor: pointer;
-border-radius: 3px;
-font-size: 0.8rem;
-z-index: 10;
-transition: all 0.3s;">
-Copy
-</button>
-            <pre style="background: rgba(0,255,255,0.05); padding: 1rem; border-radius: 5px; overflow-x: auto; margin: 0;">sudo mysql_secure_installation
-VALIDATE PASSWORD COMPONENT → Yes
-Password strength → 2
-Set root password → Yes
-Remove anonymous users → Yes
-Disallow root login remotely → Yes
-Remove test database → Yes
-Reload privilege tables → Yes</pre>
+        <h2 class="section-heading">03 | How to Install MySQL</h2>
+        
+        <h3 class="subsection-heading">Update System Packages</h3>
+        <div class="info-box">
+            <p class="info-box-title">Update the system package index to ensure you have the latest version information for all packages.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">sudo apt update</pre>
+            </div>
         </div>
 
-        <h3 style="color: var(--text); margin-top: 1.5rem; margin-bottom: 0.8rem; font-size: 1rem;">Edit MySQL Config</h3>
-        <div style="position: relative; margin-bottom: 1.5rem;">
-            <button onclick="copyToClipboard(this)"
-style="position: absolute; top: 0.5rem; right: 0.5rem;
-background: rgba(0,255,255,0.2);
-border: 1px solid var(--accent);
-color: var(--accent);
-padding: 0.4rem 0.6rem;
-cursor: pointer;
-border-radius: 3px;
-font-size: 0.8rem;
-z-index: 10;
-transition: all 0.3s;">
-Copy
-</button>
-            <pre style="background: rgba(0,255,255,0.05); padding: 1rem; border-radius: 5px; overflow-x: auto; margin: 0;">sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
-(change bind address to bind-address = 0.0.0.0)
-SAVE (CTRL + X → Y → ENTER)
-RESTART
-sudo systemctl restart mysql</pre>
+        <h3 class="subsection-heading">Upgrade System Packages</h3>
+        <div class="info-box">
+            <p class="info-box-title">Upgrade all installed packages to their latest versions. Choose to keep the local currently installed version when prompted.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">sudo apt upgrade -y</pre>
+            </div>
         </div>
 
-        <h3 style="color: var(--text); margin-top: 2rem; margin-bottom: 0.8rem; font-size: 1rem;">
-        Database User Policy (Local vs Remote)
-        </h3>
-
-        <div style="
-            background: rgba(0,255,255,0.05);
-            border-left: 4px solid var(--accent);
-            padding: 1rem;
-            border-radius: 5px;
-            margin-bottom: 2rem;
-        ">
-
-        <p style="margin-bottom: 0.8rem; color: var(--text-muted);">
-        Choose the correct MySQL user type depending on your deployment architecture.
-        </p>
-
-        <table style="width:100%; border-collapse: collapse; font-size:0.9rem;">
-        <tr style="border-bottom:1px solid var(--accent);">
-            <th style="text-align:left; padding:6px;">Type</th>
-            <th style="text-align:left; padding:6px;">Example</th>
-            <th style="text-align:left; padding:6px;">Guideline</th>
-        </tr>
-
-        <tr>
-            <td style="padding:6px;">✔ Local-only user (Recommended)</td>
-            <td style="padding:6px;"><code>'app_user'@'localhost'</code></td>
-            <td style="padding:6px;">Safer and faster when Laravel and MySQL run on the same server.</td>
-        </tr>
-
-        <tr>
-            <td style="padding:6px;">⚠ Remote user (Avoid if unnecessary)</td>
-            <td style="padding:6px;"><code>'app_user'@'%'</code></td>
-            <td style="padding:6px;">Allows external connections if MySQL port is exposed.</td>
-        </tr>
-        </table>
-
-        <p style="margin-top:1rem; color: var(--text-muted);">
-        ✔ Use <strong>localhost</strong> for production droplets.<br>
-        ✔ Use remote access only for external apps or database management tools.
-        </p>
-
-        </div>
-        <h3 style="color: var(--text); margin-top: 1.5rem; margin-bottom: 0.8rem; font-size: 1rem;">Login & Create User</h3>
-        <div style="position: relative; margin-bottom: 1.5rem;">
-            <button onclick="copyToClipboard(this)"
-style="position: absolute; top: 0.5rem; right: 0.5rem;
-background: rgba(0,255,255,0.2);
-border: 1px solid var(--accent);
-color: var(--accent);
-padding: 0.4rem 0.6rem;
-cursor: pointer;
-border-radius: 3px;
-font-size: 0.8rem;
-z-index: 10;
-transition: all 0.3s;">
-Copy
-</button>
-            <pre style="background: rgba(0,255,255,0.05); padding: 1rem; border-radius: 5px; overflow-x: auto; margin: 0;">sudo mysql -u root -p
-CREATE USER 'user01'@'localhost' IDENTIFIED BY 'P@ssword123';
-GRANT ALL PRIVILEGES ON *.* TO 'user01'@'localhost' WITH GRANT OPTION;
-FLUSH PRIVILEGES;
-\q;</pre>
+        <h3 class="subsection-heading">Install MySQL Server</h3>
+        <div class="info-box">
+            <p class="info-box-title">Install MySQL Server package on the system with automatic yes to all prompts.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">sudo apt install mysql-server -y</pre>
+            </div>
         </div>
 
-        <h3 style="color: var(--text); margin-top: 1.5rem; margin-bottom: 0.8rem; font-size: 1rem;">Test Connection</h3>
-        <div style="position: relative; margin-bottom: 1.5rem;">
-            <button onclick="copyToClipboard(this)"
-style="position: absolute; top: 0.5rem; right: 0.5rem;
-background: rgba(0,255,255,0.2);
-border: 1px solid var(--accent);
-color: var(--accent);
-padding: 0.4rem 0.6rem;
-cursor: pointer;
-border-radius: 3px;
-font-size: 0.8rem;
-z-index: 10;
-transition: all 0.3s;">
-Copy
-</button>
-            <pre style="background: rgba(0,255,255,0.05); padding: 1rem; border-radius: 5px; overflow-x: auto; margin: 0;">mysql -h ip_address -u user01 -p</pre>
+        <h3 class="subsection-heading">Start MySQL Service</h3>
+        <div class="info-box">
+            <p class="info-box-title">Start the MySQL service immediately.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">sudo systemctl start mysql</pre>
+            </div>
         </div>
 
-        <h2 style="color: var(--accent); margin-top: 3rem; margin-bottom: 1.5rem; border-top: 2px solid var(--accent); padding-top: 1.5rem; font-size: 1.3rem;">03 | How to Install Nginx</h2>
-        <div style="position: relative; margin-bottom: 1.5rem;">
-            <button onclick="copyToClipboard(this)"
-style="position: absolute; top: 0.5rem; right: 0.5rem;
-background: rgba(0,255,255,0.2);
-border: 1px solid var(--accent);
-color: var(--accent);
-padding: 0.4rem 0.6rem;
-cursor: pointer;
-border-radius: 3px;
-font-size: 0.8rem;
-z-index: 10;
-transition: all 0.3s;">
-Copy
-</button>
-            <pre style="background: rgba(0,255,255,0.05); padding: 1rem; border-radius: 5px; overflow-x: auto; margin: 0;">sudo apt install nginx -y
-sudo systemctl start nginx
-sudo systemctl enable nginx</pre>
+        <h3 class="subsection-heading">Enable MySQL on Startup</h3>
+        <div class="info-box">
+            <p class="info-box-title">Enable MySQL to start automatically when the system boots.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">sudo systemctl enable mysql</pre>
+            </div>
         </div>
 
-        <h3 style="color: var(--text); margin-top: 1.5rem; margin-bottom: 0.8rem; font-size: 1rem;">Allow Nginx in Firewall</h3>
-        <div style="position: relative; margin-bottom: 1.5rem;">
-            <button onclick="copyToClipboard(this)"
-style="position: absolute; top: 0.5rem; right: 0.5rem;
-background: rgba(0,255,255,0.2);
-border: 1px solid var(--accent);
-color: var(--accent);
-padding: 0.4rem 0.6rem;
-cursor: pointer;
-border-radius: 3px;
-font-size: 0.8rem;
-z-index: 10;
-transition: all 0.3s;">
-Copy
-</button>
-            <pre style="background: rgba(0,255,255,0.05); padding: 1rem; border-radius: 5px; overflow-x: auto; margin: 0;">sudo ufw allow 'Nginx Full'
-sudo ufw enable
-sudo ufw status</pre>
+        <h3 class="subsection-heading">Check MySQL Status</h3>
+        <div class="info-box">
+            <p class="info-box-title">Verify that MySQL service is running properly.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">sudo systemctl status mysql</pre>
+            </div>
         </div>
 
-        <h3 style="color: var(--text); margin-top: 1.5rem; margin-bottom: 0.8rem; font-size: 1rem;">Test Nginx</h3>
-        <p style="color: var(--text-muted); margin-top: 0.5rem; margin-bottom: 1.5rem;">Open browser and navigate to http://your_droplet_ip to verify Nginx is running.</p>
-
-        <h2 style="color: var(--accent); margin-top: 3rem; margin-bottom: 1.5rem; border-top: 2px solid var(--accent); padding-top: 1.5rem; font-size: 1.3rem;">04 | How to Install Laravel</h2>
-        <h3 style="color: var(--text); margin-top: 1.5rem; margin-bottom: 0.8rem; font-size: 1rem;">Install PHP</h3>
-        <div style="position: relative; margin-bottom: 1.5rem;">
-            <button onclick="copyToClipboard(this)"
-style="position: absolute; top: 0.5rem; right: 0.5rem;
-background: rgba(0,255,255,0.2);
-border: 1px solid var(--accent);
-color: var(--accent);
-padding: 0.4rem 0.6rem;
-cursor: pointer;
-border-radius: 3px;
-font-size: 0.8rem;
-z-index: 10;
-transition: all 0.3s;">
-Copy
-</button>
-            <pre style="background: rgba(0,255,255,0.05); padding: 1rem; border-radius: 5px; overflow-x: auto; margin: 0;">sudo apt install php php-fpm php-mysql php-cli php-curl php-mbstring php-xml php-zip php-bcmath php-tokenizer php-common php-intl unzip curl -y</pre>
+        <h3 class="subsection-heading">Secure MySQL Installation</h3>
+        <div class="info-box">
+            <p class="info-box-title">Run the security script to improve MySQL security by removing insecure defaults and restricting access.</p>
+            <div class="code-block-wrapper with-spacing">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">sudo mysql_secure_installation</pre>
+            </div>
+            <p class="info-box-title"><strong>When prompted, respond with these options:</strong></p>
+            <ul>
+                <li>VALIDATE PASSWORD COMPONENT → <strong>Yes</strong></li>
+                <li>Password strength → <strong>2</strong></li>
+                <li>Set root password → <strong>Yes</strong></li>
+                <li>Remove anonymous users → <strong>Yes</strong></li>
+                <li>Disallow root login remotely → <strong>Yes</strong></li>
+                <li>Remove test database → <strong>Yes</strong></li>
+                <li>Reload privilege tables → <strong>Yes</strong></li>
+            </ul>
         </div>
 
-        <h3 style="color: var(--text); margin-top: 1.5rem; margin-bottom: 0.8rem; font-size: 1rem;">Install Composer</h3>
-        <div style="position: relative; margin-bottom: 1.5rem;">
-            <button onclick="copyToClipboard(this)"
-style="position: absolute; top: 0.5rem; right: 0.5rem;
-background: rgba(0,255,255,0.2);
-border: 1px solid var(--accent);
-color: var(--accent);
-padding: 0.4rem 0.6rem;
-cursor: pointer;
-border-radius: 3px;
-font-size: 0.8rem;
-z-index: 10;
-transition: all 0.3s;">
-Copy
-</button>
-            <pre style="background: rgba(0,255,255,0.05); padding: 1rem; border-radius: 5px; overflow-x: auto; margin: 0;">cd ~
-curl -sS https://getcomposer.org/installer -o composer-setup.php
-sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer</pre>
+        <h3 class="subsection-heading">Edit MySQL Configuration</h3>
+        <div class="info-box">
+            <p class="info-box-title">Edit the MySQL configuration file to allow remote connections. Open the config file with nano editor.</p>
+            <div class="code-block-wrapper with-spacing">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf</pre>
+            </div>
+            <p class="info-box-title"><strong>Inside the editor:</strong></p>
+            <ul>
+                <li>Find the line: <code class="code-inline">bind-address = 127.0.0.1</code></li>
+                <li>Change it to: <code class="code-inline">bind-address = 0.0.0.0</code></li>
+                <li>Save and exit: <strong>CTRL + X</strong> → <strong>Y</strong> → <strong>ENTER</strong></li>
+            </ul>
         </div>
 
-        <h3 style="color: var(--text); margin-top: 1.5rem; margin-bottom: 0.8rem; font-size: 1rem;">Clone or Create Laravel Project</h3>
-        <div style="position: relative; margin-bottom: 1.5rem;">
-            <button onclick="copyToClipboard(this)"
-style="position: absolute; top: 0.5rem; right: 0.5rem;
-background: rgba(0,255,255,0.2);
-border: 1px solid var(--accent);
-color: var(--accent);
-padding: 0.4rem 0.6rem;
-cursor: pointer;
-border-radius: 3px;
-font-size: 0.8rem;
-z-index: 10;
-transition: all 0.3s;">
-Copy
-</button>
-            <pre style="background: rgba(0,255,255,0.05); padding: 1rem; border-radius: 5px; overflow-x: auto; margin: 0;">cd /var/www
-sudo composer create-project laravel/laravel myproject</pre>
+        <h3 class="subsection-heading">Restart MySQL Service</h3>
+        <div class="info-box">
+            <p class="info-box-title">Restart MySQL service to apply the configuration changes.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">sudo systemctl restart mysql</pre>
+            </div>
         </div>
 
-        <h3 style="color: var(--text); margin-top: 1.5rem; margin-bottom: 0.8rem; font-size: 1rem;">Set Permissions</h3>
-        <div style="position: relative; margin-bottom: 1.5rem;">
-            <button onclick="copyToClipboard(this)"
-style="position: absolute; top: 0.5rem; right: 0.5rem;
-background: rgba(0,255,255,0.2);
-border: 1px solid var(--accent);
-color: var(--accent);
-padding: 0.4rem 0.6rem;
-cursor: pointer;
-border-radius: 3px;
-font-size: 0.8rem;
-z-index: 10;
-transition: all 0.3s;">
-Copy
-</button>
-            <pre style="background: rgba(0,255,255,0.05); padding: 1rem; border-radius: 5px; overflow-x: auto; margin: 0;">sudo chown -R www-data:www-data /var/www/myproject
-sudo chmod -R 775 /var/www/myproject/storage
-sudo chmod -R 775 /var/www/myproject/bootstrap/cache</pre>
+        <h3 class="subsection-heading">Database User Policy (Local vs Remote)</h3>
+
+        <div class="info-box">
+            <p class="info-box-title">Choose the correct MySQL user type depending on your deployment architecture.</p>
+
+            <table class="tutorial-table">
+                <tr>
+                    <th>Type</th>
+                    <th>Example</th>
+                    <th>Guideline</th>
+                </tr>
+
+                <tr>
+                    <td>✔ Local-only user (Recommended)</td>
+                    <td><code class="code-inline">'app_user'@'localhost'</code></td>
+                    <td>Safer and faster when Laravel and MySQL run on the same server.</td>
+                </tr>
+
+                <tr>
+                    <td>⚠ Remote user (Avoid if unnecessary)</td>
+                    <td><code class="code-inline">'app_user'@'%'</code></td>
+                    <td>Allows external connections if MySQL port is exposed.</td>
+                </tr>
+            </table>
+
+            <p>
+                ✔ Use <strong>localhost</strong> for production droplets.<br>
+                ✔ Use remote access only for external apps or database management tools.
+            </p>
+        </div>
+        <h3 class="subsection-heading">Login to MySQL</h3>
+        <div class="info-box">
+            <p class="info-box-title">Connect to MySQL as the root user. You will be prompted to enter the root password you set during the security installation.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">sudo mysql -u root -p</pre>
+            </div>
         </div>
 
-        <h3 style="color: var(--text); margin-top: 1.5rem; margin-bottom: 0.8rem; font-size: 1rem;">Configure .env Database</h3>
-        <div style="position: relative; margin-bottom: 1.5rem;">
-            <button onclick="copyToClipboard(this)"
-style="position: absolute; top: 0.5rem; right: 0.5rem;
-background: rgba(0,255,255,0.2);
-border: 1px solid var(--accent);
-color: var(--accent);
-padding: 0.4rem 0.6rem;
-cursor: pointer;
-border-radius: 3px;
-font-size: 0.8rem;
-z-index: 10;
-transition: all 0.3s;">
-Copy
-</button>
-            <pre style="background: rgba(0,255,255,0.05); padding: 1rem; border-radius: 5px; overflow-x: auto; margin: 0;">sudo nano /var/www/myproject/.env
+        <h3 class="subsection-heading">Create Database User</h3>
+        <div class="info-box">
+            <p class="info-box-title">Create a new MySQL user for your application. Run this command inside the MySQL prompt.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">CREATE USER 'user01'@'localhost' IDENTIFIED BY 'P@ssword123';</pre>
+            </div>
+        </div>
 
-DB_CONNECTION=mysql
+        <h3 class="subsection-heading">Grant Privileges</h3>
+        <div class="info-box">
+            <p class="info-box-title">Grant all database privileges to the new user. Run this command inside the MySQL prompt.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">GRANT ALL PRIVILEGES ON *.* TO 'user01'@'localhost' WITH GRANT OPTION;</pre>
+            </div>
+        </div>
+
+        <h3 class="subsection-heading">Flush Privileges</h3>
+        <div class="info-box">
+            <p class="info-box-title">Reload the privilege tables to apply the changes immediately. Run this command inside the MySQL prompt.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">FLUSH PRIVILEGES;</pre>
+            </div>
+        </div>
+
+        <h3 class="subsection-heading">Exit MySQL</h3>
+        <div class="info-box">
+            <p class="info-box-title">Exit the MySQL command prompt and return to the shell.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">\q;</pre>
+            </div>
+        </div>
+
+        <h3 class="subsection-heading">Test Connection</h3>
+        <div class="info-box">
+            <p class="info-box-title">Test the connection to MySQL with the newly created user from your local machine or another server.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">mysql -h ip_address -u user01 -p</pre>
+            </div>
+        </div>
+
+        <h2 class="section-heading">04 | How to Install Nginx</h2>
+        
+        <h3 class="subsection-heading">Install Nginx Web Server</h3>
+        <div class="info-box">
+            <p class="info-box-title">Install Nginx web server package on the system.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">sudo apt install nginx -y</pre>
+            </div>
+        </div>
+
+        <h3 class="subsection-heading">Start Nginx Service</h3>
+        <div class="info-box">
+            <p class="info-box-title">Start the Nginx service immediately.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">sudo systemctl start nginx</pre>
+            </div>
+        </div>
+
+        <h3 class="subsection-heading">Enable Nginx on Startup</h3>
+        <div class="info-box">
+            <p class="info-box-title">Enable Nginx to start automatically when the system boots.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">sudo systemctl enable nginx</pre>
+            </div>
+        </div>
+
+        <h3 class="subsection-heading">Allow Nginx in Firewall</h3>
+        <div class="info-box">
+            <p class="info-box-title">Configure the firewall to allow HTTP and HTTPS traffic for Nginx.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">sudo ufw allow 'Nginx Full'</pre>
+            </div>
+        </div>
+
+        <h3 class="subsection-heading">Enable UFW Firewall</h3>
+        <div class="info-box">
+            <p class="info-box-title">Enable the Ubuntu Firewall if it's not already enabled.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">sudo ufw enable</pre>
+            </div>
+        </div>
+
+        <h3 class="subsection-heading">Check Firewall Status</h3>
+        <div class="info-box">
+            <p class="info-box-title">Verify that the firewall rules have been applied correctly.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">sudo ufw status</pre>
+            </div>
+        </div>
+
+        <h3 class="subsection-heading">Test Nginx Installation</h3>
+        <div class="info-box">
+            <p>Open a web browser and navigate to: <code class="code-inline">http://your_droplet_ip</code></p>
+            <p>You should see the default Nginx welcome page, confirming the installation was successful.</p>
+        </div>
+
+        <h2 class="section-heading">05 | How to Install Laravel</h2>
+        
+        <h3 class="subsection-heading">Install PHP and Extensions</h3>
+        <div class="info-box">
+            <p class="info-box-title">Install PHP and all required extensions needed for Laravel development.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">sudo apt install php php-fpm php-mysql php-cli php-curl php-mbstring php-xml php-zip php-bcmath php-tokenizer php-common php-intl unzip curl -y</pre>
+            </div>
+        </div>
+
+        <h3 class="subsection-heading">Navigate to Home Directory</h3>
+        <div class="info-box">
+            <p class="info-box-title">Change to the home directory to download Composer.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">cd ~</pre>
+            </div>
+        </div>
+
+        <h3 class="subsection-heading">Download Composer Setup</h3>
+        <div class="info-box">
+            <p class="info-box-title">Download the official Composer installer from the getcomposer.org website.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">curl -sS https://getcomposer.org/installer -o composer-setup.php</pre>
+            </div>
+        </div>
+
+        <h3 class="subsection-heading">Install Composer</h3>
+        <div class="info-box">
+            <p class="info-box-title">Install Composer to make it globally available as a system-wide command.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer</pre>
+            </div>
+        </div>
+
+        <h3 class="subsection-heading">Navigate to Web Directory</h3>
+        <div class="info-box">
+            <p class="info-box-title">Change to the /var/www directory where web applications are typically stored.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">cd /var/www</pre>
+            </div>
+        </div>
+
+        <h3 class="subsection-heading">Create New Laravel Project</h3>
+        <div class="info-box">
+            <p class="info-box-title">Create a new Laravel project. This will download Laravel and all dependencies using Composer. Replace "myproject" with your desired project name.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">sudo composer create-project laravel/laravel myproject</pre>
+            </div>
+        </div>
+
+        <h3 class="subsection-heading">Set Directory Ownership</h3>
+        <div class="info-box">
+            <p class="info-box-title">Change the ownership of the Laravel project directory to the www-data user (Nginx's user).</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">sudo chown -R www-data:www-data /var/www/myproject</pre>
+            </div>
+        </div>
+
+        <h3 class="subsection-heading">Set Storage Directory Permissions</h3>
+        <div class="info-box">
+            <p class="info-box-title">Make the storage directory writable so Laravel can write logs and cache files.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">sudo chmod -R 775 /var/www/myproject/storage</pre>
+            </div>
+        </div>
+
+        <h3 class="subsection-heading">Set Bootstrap Cache Directory Permissions</h3>
+        <div class="info-box">
+            <p class="info-box-title">Make the bootstrap cache directory writable for Laravel to cache configuration files.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">sudo chmod -R 775 /var/www/myproject/bootstrap/cache</pre>
+            </div>
+        </div>
+
+        <h3 class="subsection-heading">Edit Environment Configuration</h3>
+        <div class="info-box">
+            <p class="info-box-title">Edit the .env file to configure database connection settings for Laravel.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">sudo nano /var/www/myproject/.env</pre>
+            </div>
+        </div>
+
+        <h3 class="subsection-heading">Configure Database Settings</h3>
+        <div class="info-box">
+            <p class="info-box-title">Update these lines in the .env file with your database credentials. Find these settings and modify them accordingly.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">DB_CONNECTION=mysql
 DB_DATABASE=myproject
 DB_USERNAME=user01
 DB_PASSWORD=P@ssword123</pre>
+            </div>
         </div>
 
-        <h3 style="color: var(--text); margin-top: 1.5rem; margin-bottom: 0.8rem; font-size: 1rem;">Configure Nginx for Laravel</h3>
-        <div style="position: relative; margin-bottom: 1.5rem;">
-            <button onclick="copyToClipboard(this)"
-style="position: absolute; top: 0.5rem; right: 0.5rem;
-background: rgba(0,255,255,0.2);
-border: 1px solid var(--accent);
-color: var(--accent);
-padding: 0.4rem 0.6rem;
-cursor: pointer;
-border-radius: 3px;
-font-size: 0.8rem;
-z-index: 10;
-transition: all 0.3s;">
-Copy
-</button>
-            <pre style="background: rgba(0,255,255,0.05); padding: 1rem; border-radius: 5px; overflow-x: auto; margin: 0;">sudo nano /etc/nginx/sites-available/myproject
+        <h3 class="subsection-heading">Create Nginx Server Block</h3>
+        <div class="info-box">
+            <p class="info-box-title">Create an Nginx configuration file for your Laravel application. This defines how Nginx will serve your Laravel project.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">sudo nano /etc/nginx/sites-available/myproject</pre>
+            </div>
+        </div>
 
-server {
+        <h3 class="subsection-heading">Nginx Configuration Content</h3>
+        <div class="info-box">
+            <p class="info-box-title">Paste the following configuration into the editor and save. This configures Nginx to properly handle PHP requests and route them to Laravel.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">server {
     listen 80;
     server_name your_droplet_ip;
 
@@ -420,54 +450,57 @@ server {
         deny all;
     }
 }</pre>
+            </div>
         </div>
 
-        <h3 style="color: var(--text); margin-top: 1.5rem; margin-bottom: 0.8rem; font-size: 1rem;">Enable Configuration & Restart</h3>
-        <div style="position: relative; margin-bottom: 1.5rem;">
-            <button onclick="copyToClipboard(this)"
-style="position: absolute; top: 0.5rem; right: 0.5rem;
-background: rgba(0,255,255,0.2);
-border: 1px solid var(--accent);
-color: var(--accent);
-padding: 0.4rem 0.6rem;
-cursor: pointer;
-border-radius: 3px;
-font-size: 0.8rem;
-z-index: 10;
-transition: all 0.3s;">
-Copy
-</button>
-            <pre style="background: rgba(0,255,255,0.05); padding: 1rem; border-radius: 5px; overflow-x: auto; margin: 0;">sudo ln -s /etc/nginx/sites-available/myproject /etc/nginx/sites-enabled/
-sudo nginx -t
-sudo systemctl restart nginx</pre>
+        <h3 class="subsection-heading">Enable Site Configuration</h3>
+        <div class="info-box">
+            <p class="info-box-title">Create a symbolic link to enable the Nginx site configuration.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">sudo ln -s /etc/nginx/sites-available/myproject /etc/nginx/sites-enabled/</pre>
+            </div>
         </div>
 
-        <h3 style="color: var(--text); margin-top: 1.5rem; margin-bottom: 0.8rem; font-size: 1rem;">Migrate Database</h3>
-        <div style="position: relative; margin-bottom: 1.5rem;">
-            <button onclick="copyToClipboard(this)"
-style="position: absolute; top: 0.5rem; right: 0.5rem;
-background: rgba(0,255,255,0.2);
-border: 1px solid var(--accent);
-color: var(--accent);
-padding: 0.4rem 0.6rem;
-cursor: pointer;
-border-radius: 3px;
-font-size: 0.8rem;
-z-index: 10;
-transition: all 0.3s;">
-Copy
-</button>
-            <pre style="background: rgba(0,255,255,0.05); padding: 1rem; border-radius: 5px; overflow-x: auto; margin: 0;">php artisan migrate</pre>
+        <h3 class="subsection-heading">Test Nginx Configuration</h3>
+        <div class="info-box">
+            <p class="info-box-title">Verify that your Nginx configuration file has no syntax errors.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">sudo nginx -t</pre>
+            </div>
         </div>
 
-        <p style="color: var(--text-muted); margin-top: 1.5rem;">Now open your browser and navigate to your droplet/server IP address to see your Laravel application in action.</p>
+        <h3 class="subsection-heading">Restart Nginx Service</h3>
+        <div class="info-box">
+            <p class="info-box-title">Apply the configuration changes by restarting Nginx.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">sudo systemctl restart nginx</pre>
+            </div>
+        </div>
+
+        <h3 class="subsection-heading">Run Database Migrations</h3>
+        <div class="info-box">
+            <p class="info-box-title">Execute Laravel database migrations to set up the required database tables for your application.</p>
+            <div class="code-block-wrapper compact">
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                <pre class="code-pre">php artisan migrate</pre>
+            </div>
+        </div>
+
+        <h3 class="subsection-heading">Launch Your Application</h3>
+        <div class="info-box">
+            <p>Open a web browser and navigate to: <code class="code-inline">http://your_droplet_ip</code></p>
+            <p>Your Laravel application should now be live and running on your Ubuntu server with MySQL, Nginx, and PHP fully configured.</p>
+        </div>
     </section>
 
-    <footer>
-        <div style="display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1rem;">
-            <a href="https://www.facebook.com/kaye.liezl" target="_blank" style="color: var(--accent); text-decoration: none; font-size: 0.9rem;">Facebook</a>
-            <span style="color: var(--text-muted);">|</span>
-            <a href="#" target="_blank" style="color: var(--accent); text-decoration: none; font-size: 0.9rem;">LinkedIn</a>
+    <footer class="tutorial-footer">
+        <div class="footer-links">
+            <a href="https://www.facebook.com/kaye.liezl" target="_blank">Facebook</a>
+            <span class="footer-divider">|</span>
+            <a href="#" target="_blank">LinkedIn</a>
         </div>
         <p>SYSTEM TIMESTAMP: 2026 | ALL RIGHTS RESERVED BY LIEZL KAYE ROA.</p>
     </footer>
@@ -481,7 +514,7 @@ Copy
 
             const originalText = button.innerText;
 
-            button.innerText = "Copied ✓";
+            button.innerText = "Copied";
             button.style.backgroundColor = "var(--accent)";
             button.style.color = "#ffffff";
 
